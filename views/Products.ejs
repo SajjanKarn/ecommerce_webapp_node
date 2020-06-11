@@ -1,0 +1,32 @@
+<%- include("./partials/adminNavbar") %>
+<link rel="stylesheet" href="/css/adminPanelcss.css">
+
+<div class="adminPanel">
+    <h1>Post a New Product.</h1>
+    <a href="/admin/products/new" class="btn btn-raised btn-primary mb-3">Add new Products <i class="ml-2 fa fa-desktop" aria-hidden="true"></i>
+    </a>
+
+    <div class="adminPanel allProduct">
+
+       
+        <% product.forEach(item => { %>
+            <div class="card m-3" style="width: 18rem;">
+                <div class="card-body">
+                    <img class="card-img-top" src="<%= item.image %>"
+                    alt="Card image cap">
+                    <h5 class="card-title"><%= item.name %> </h5>
+                    <p class="card-body">$  <%= item.price %> </p>
+                    <a href="/admin/edit/product/<%= item._id %>  " class="btn btn-primary btn-raised">Edit <i
+                            class="fa fa-pencil-square-o ml-2" aria-hidden="true"></i></a>
+                    <a href="/admin/delete/product/<%= item._id %> " class="btn btn-danger btn-raised">Delete <i
+                            class="fa fa-trash ml-2" aria-hidden="true"></i></i></a>
+                </div>
+            </div>
+       <% }) %>
+
+
+    
+    </div>
+
+
+</div>

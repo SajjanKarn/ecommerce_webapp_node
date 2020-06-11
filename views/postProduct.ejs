@@ -1,0 +1,23 @@
+<%- include("./partials/adminNavbar") %>
+<link rel="stylesheet" href="/css/adminPanelcss.css">
+
+
+<div class="adminPanel">
+    <form action="/admin/products/new" method="POST" enctype="multipart/form-data" autocomplete="off">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Name</label>
+              <input required name="productName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Product Name">
+              </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Price</label>
+              <input required name="productPrice" type="number" class="form-control" id="exampleInputPassword1" placeholder="Price">
+            </div>
+            <div class="form-group">
+                <label for="file">Choose Image</label>
+                <input name="productImage" type="file" accept="image/*" class="form-control" id="file" class="custom-file-input">
+              </div>
+
+              <button type="submit" class="btn btn-raised btn-primary">save product</button>
+              <a href="/admin/products" class="btn btn-raised btn-danger">cancel</a>
+    </form>
+</div>

@@ -1,0 +1,17 @@
+
+<link rel="stylesheet" href="css/login.css">
+
+<% const currentYear = new Date().getFullYear();%>
+
+<div class="container-custom">
+    <form class="form-signin" action="/admin" method="POST" autocomplete="off">
+        <img class="mb-4 admin-logo rounded-circle" src="https://www.tx2.fr/wp-content/uploads/2018/11/avatar_jeune_homme_lunettes_developpeur_geek.jpg" alt="logo" width="150" height="auto">
+        <h1 class="h3 mb-3 font-weight-normal">Admin</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="username" name="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control mt-4" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block btn-raised" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; All rights reserved by Coder Sajjan <%- currentYear %> </p>
+      </form>
+</div>

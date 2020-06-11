@@ -1,0 +1,9 @@
+.adminPanel {
+    padding: 50px 30px
+}
+
+.allProduct {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}

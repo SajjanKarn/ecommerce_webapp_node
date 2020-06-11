@@ -1,0 +1,41 @@
+<%- include("./partials/adminNavbar") %>
+<link rel="stylesheet" href="/css/adminPanelcss.css">
+
+<div class="adminPanel">
+    <h1>Add Admin Accounts</h1>
+    <form action="/admin/createaccounts" method="POST" autocomplete="off" >
+            <div class="form-group">
+              <label for="exampleInputEmail1">Username</label>
+                <input required type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+              </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="switch mt-3">
+              <label>
+                <input type="checkbox" onclick="showPassword()" id="exampleCheck1">
+               Show Password
+              </label>
+            </div>
+            <div class="checkbox mt-3">
+              <label>
+                <input type="checkbox" name="checked" required> Are you sure that you want to this account as Admin ?
+              </label>
+            </div> 
+            <button type="submit" class="btn btn-primary btn-raised mt-3">Save</button>
+            <a href="/admin/accounts" class="btn btn-danger btn-raised mt-3">Cancel</a>
+    </form>
+</div>
+
+<script>
+  const passwordInput = document.getElementById("exampleInputPassword1");
+  const showPasswordCheckBox = document.getElementById("exampleCheck1");
+
+  const showPassword = () => {
+
+      passwordInput.type === "password" ? passwordInput.type = "text" : passwordInput.type = "password";
+  };
+
+
+</script>

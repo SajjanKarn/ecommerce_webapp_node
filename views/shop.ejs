@@ -1,0 +1,21 @@
+
+<%- include("./partials/navbar") %>
+
+<div class="container-custom shop-container">
+
+    <% product.forEach(item => { %>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="<%= item.image %> "
+                alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><%= item.name %> </h5>
+                <p class="text-left">$<%= item.price %> </p>
+                <a href="#" class="btn btn-primary">Add to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    <% }) %>
+
+
+
+</div>

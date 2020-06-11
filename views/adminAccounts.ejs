@@ -1,0 +1,19 @@
+<%- include("./partials/adminNavbar") %>
+<link rel="stylesheet" href="/css/adminPanelcss.css">
+<div class="adminPanel">
+
+    <a href="/admin/createaccounts" class="btn btn-raised btn-primary mb-3">Add new user <i class="ml-2 fa fa-user-plus"
+            aria-hidden="true"></i>
+    </a>
+    <% adminAccounts.forEach(account => { %>
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title"><%= account.username %> </h5>
+            <a href="/admin/edit/account/<%= account._id %> " class="btn btn-primary btn-raised">Edit <i
+                    class="fa fa-pencil-square-o ml-2" aria-hidden="true"></i></a>
+            <a href="/admin/delete/account/<%= account._id %> " class="btn btn-danger btn-raised">Delete <i
+                    class="fa fa-trash ml-2" aria-hidden="true"></i></i></a>
+        </div>
+    </div>
+    <% })%>
+</div>

@@ -1,0 +1,29 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+/* navbar  */
+.navbar {
+  background: transparent !important;
+}
+
+/* carousel image */
+.container-custom {
+  padding: 50px;
+}
+
+.l-sp {
+  letter-spacing: 1.2px;
+}
+
+/* shop coontaier */
+.shop-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.shop-container .card {
+  margin: 10px;
+}
