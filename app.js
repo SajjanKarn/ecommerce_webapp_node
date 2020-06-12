@@ -1,3 +1,6 @@
+// here we will require the .env file support
+require("dotenv").config();
+
 const express = require("express");
 const PORT = process.env.PORT || 3000;
 const cookieSession = require("cookie-session");
@@ -10,7 +13,7 @@ const Admin = require("./models/Admin");
 const app = express();
 
 // connection to mongodb is here.
-db = mongoose.connect("mongodb://localhost:27017/ecommerce", {
+db = mongoose.connect(process.env.MONGOOSE_CONNECTION, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -23,7 +26,7 @@ mongoose.connection.on("connected", () => {
 // cookies session middlewares
 app.use(
   cookieSession({
-    keys: ["fksjlalkjfksdfkl"],
+    keys: [process.env.COOKIE_ENCRYPTION],
   })
 );
 

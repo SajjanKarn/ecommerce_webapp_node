@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/css/adminPanelcss.css">
+<%- include("./partials/adminNavbar") %>
+
+<div class="adminPanel">
+    <h1>Edit About Section</h1>
+    <form method="post" action="/admin/about">
+        <textarea name="content" id="mytextarea" rows="10"><%= data.content %></textarea>
+        <button type="submit" class="btn btn-raised btn-primary mt-4">Save</button>
+        <a href="/" class="btn btn-raised btn-danger mt-4">Cancle</a>
+    </form>
+</div>
+
+<script src="https://cdn.tiny.cloud/1/<%= apiKey %> /tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea'
+    });
+</script>

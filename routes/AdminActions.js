@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const authoriseAdmin = require("../middlewares/CheckAdmin");
+const AboutSection = require("../models/About");
 const Admin = require("../models/Admin");
 
 router
@@ -20,6 +21,11 @@ router
       req.session.user = null;
       res.redirect("/");
     }
+  })
+
+  .get("/admin/about", authoriseAdmin, async(req, res) => {
+    const data = await AboutSection.find();
+    res.render("adminAboutEdit", {data: data[0], apiKey: process.env.TINY_MCE_API_KEY});
   })
 
   .get("/admin/accounts", authoriseAdmin, (req, res) => {
@@ -79,6 +85,29 @@ router
     newAdminUser
       .save()
       .then(() => console.log("Successfully added new Admin User"));
+
+    res.redirect("/admin/panel");
+  })
+
+  .post("/admin/about", authoriseAdmin, async (req, res) => {
+    const { content } = req.body;
+    if (!content) {
+      res.send("Please enter something!");
+      return;
+    }
+
+    const data = new AboutSection({ content });
+
+    const result = await AboutSection.deleteMany({});
+
+    if (result) {
+      console.log("Delete about success!")
+    }
+
+    data
+      .save()
+      .then(() => console.log("Save Success!"))
+      .catch((err) => console.log(err));
 
     res.redirect("/admin/panel");
   });
