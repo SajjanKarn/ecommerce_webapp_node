@@ -6,12 +6,10 @@ const Product = require("../models/Item");
 router
   .get("/about", async(req, res) => {
     const allData = await AdminSection.find();
-    console.log(allData)
     res.render("about", {data: allData[0]});
   })
   .get("/shop", async (req, res) => {
     const getAllProduct = await Product.find();
-    console.log(getAllProduct);
     res.render("shop", { product: getAllProduct });
   })
   .get("/contact", (req, res) => {

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Admin = require("../models/Admin");
-const authoriseAdmin = require("../middlewares/CheckAdmin")
+const bcrypt = require("bcrypt");
+const authoriseAdmin = require("../middlewares/CheckAdmin");
 
 router
   .get("/admin/edit/account/:id", authoriseAdmin, (req, res) => {
@@ -22,19 +23,23 @@ router
       res.render("editAdminAccounts", { id: _id, username, password });
     });
   })
-  .post(
-    "/admin/edit/account/:id", authoriseAdmin,(req, res)=> {
-      const { username, password } = req.body;
+  .post("/admin/edit/account/:id", authoriseAdmin, async (req, res) => {
+    const { username, password, newPassword } = req.body;
 
-      Admin.updateOne({ _id: req.params.id }, { username, password }, (err) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
+    const result = await Admin.findOne({ _id: req.params.id });
 
-        console.log("Update account successfully");
-        res.redirect("/admin/accounts")
+    bcrypt.compare(password, result.password).then(function (result) {
+      // if true then we will hash the password
+      bcrypt.hash(newPassword, 10).then(function (hash) {
+        // Store hash in your password DB.
+        Admin.updateOne({ _id: req.params.id }, { username, password: hash })
+          .then(() => {
+            console.log("Account Updated successfully!");
+            res.redirect("/admin/accounts");
+          })
+          .catch((err) => console.log(err));
       });
-    })
+    });
+  });
 
 module.exports = router;

@@ -3,16 +3,21 @@
 
 
 <div class="adminPanel">
-    <form action="/admin/edit/<%= id %> " method="POST" autocomplete="off">
+    <form action="/admin/edit/account/<%= id %>" method="POST" autocomplete="off">
         <div class="form-group">
             <label for="exampleInputEmail1">Username</label>
             <input required value="<%= username %> " type="text" name="username" class="form-control"
                 id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" value="<%= password %> " name="password" class="form-control" id="exampleInputPassword1"
-                placeholder="Password">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" name="password" class="form-control" id="currentPassword"
+                placeholder="Current Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">New Password</label>
+            <input type="password" name="newPassword" class="form-control" id="exampleInputPassword1"
+                placeholder="New Password">
         </div>
         <div class="switch">
             <label>
@@ -28,11 +33,13 @@
 
 <script>
     const passwordInput = document.getElementById("exampleInputPassword1");
+    const currentPasswordInput = document.getElementById("currentPassword");
     const showPasswordCheckBox = document.getElementById("exampleCheck1");
 
     const showPassword = () => {
 
         passwordInput.type === "password" ? passwordInput.type = "text" : passwordInput.type = "password";
+        currentPasswordInput.type === "password" ? currentPasswordInput.type = "text" : currentPasswordInput.type = "password";
     };
 
 

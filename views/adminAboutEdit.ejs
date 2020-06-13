@@ -10,10 +10,10 @@
     </form>
 </div>
 
-<script src="https://cdn.tiny.cloud/1/<%= apiKey %> /tinymce/5/tinymce.min.js"
-    referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/<%= apiKey %>/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
-        selector: '#mytextarea'
+        selector: '#mytextarea',
+        plugins: "image, advcode"
     });
 </script>

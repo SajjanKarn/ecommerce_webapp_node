@@ -8,7 +8,6 @@ const util = require("util");
 router
   .get("/admin/products", authoriseAdmin, async (req, res) => {
     const allProducts = await Product.find();
-    console.log(allProducts);
     res.render("Products", { product: allProducts });
   })
 

@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const authoriseAdmin = require("../middlewares/CheckAdmin");
+const bcrypt = require("bcrypt");
 const AboutSection = require("../models/About");
 const Admin = require("../models/Admin");
 
 router
   .get("/admin/panel", authoriseAdmin, (req, res) => {
-    const { isAdmin, username } = req.session.user;
-    res.render("adminPanel", { isAdmin, username });
+    res.render("adminPanel", { user: req.session.user });
   })
 
   .get("/logout", (req, res) => {
@@ -14,7 +14,7 @@ router
       res.send("You need to be first logged In!");
       return;
     }
-    if (req.session.user.isAdmin) {
+    if (req.session.user && req.session.user.isAdmin) {
       req.session.user = null;
       res.redirect("/admin");
     } else {
@@ -23,9 +23,12 @@ router
     }
   })
 
-  .get("/admin/about", authoriseAdmin, async(req, res) => {
+  .get("/admin/about", authoriseAdmin, async (req, res) => {
     const data = await AboutSection.find();
-    res.render("adminAboutEdit", {data: data[0], apiKey: process.env.TINY_MCE_API_KEY});
+    res.render("adminAboutEdit", {
+      data: data[0],
+      apiKey: process.env.TINY_MCE_API_KEY,
+    });
   })
 
   .get("/admin/accounts", authoriseAdmin, (req, res) => {
@@ -77,16 +80,21 @@ router
       return;
     }
 
-    const newAdminUser = new Admin({
-      username,
-      password,
-    });
+    bcrypt.hash(password, 10).then(function (hash) {
+      // Store hash in your password DB.
+      const newAdminUser = new Admin({
+        username,
+        password: hash,
+      });
 
-    newAdminUser
-      .save()
-      .then(() => console.log("Successfully added new Admin User"));
+      newAdminUser
+        .save()
+        .then(() => console.log("Successfully added new Admin User"));
 
-    res.redirect("/admin/panel");
+        res.redirect("/admin/panel");
+    }).catch(err => console.log(err))
+
+    
   })
 
   .post("/admin/about", authoriseAdmin, async (req, res) => {
@@ -101,7 +109,7 @@ router
     const result = await AboutSection.deleteMany({});
 
     if (result) {
-      console.log("Delete about success!")
+      console.log("Delete about success!");
     }
 
     data
