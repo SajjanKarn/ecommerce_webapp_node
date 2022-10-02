@@ -18,11 +18,6 @@ db = mongoose.connect(process.env.MONGOOSE_CONNECTION, {
   useUnifiedTopology: true,
 });
 
-// here we will check if the connection to mongodb was successful
-mongoose.connection.on("connected", () => {
-  console.log("Connection to mongodb was successful!");
-});
-
 // cookies session middlewares
 app.use(
   cookieSession({
@@ -46,7 +41,14 @@ app.use(require("./routes/AdminActions"));
 app.use(require("./routes/CreateProducts"));
 app.use(require("./routes/ProductActions"));
 
-// server configuration are here.
-app.listen(PORT, () => {
-  console.log(`Server started listening on port : ${PORT}`);
+
+// here we will check if the connection to mongodb was successful
+mongoose.connection.on("connected", () => {
+  console.log("Connection to mongodb was successful!");
+  // server configuration are here.
+  app.listen(PORT, () => {
+    console.log(`Server started listening on port : ${PORT}`);
+  });
 });
+
+
